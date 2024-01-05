@@ -24,9 +24,14 @@ Stack allocate_stack(uint size){
 
 void freeStack(Stack S){
     if (S != NULL){
-        free(S->content);
+        if (S->content != NULL){
+            for(int i = 0 ; i < S->size; i++){
+                if (S->content[i] != NULL) free(S->content[i]);
+            }
+            free(S->content);
+        }
+        free(S);
     }
-    free(S);
 };
 
 
